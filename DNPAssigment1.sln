@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DNPAssigment1", "DNPAssigment1\DNPAssigment1.csproj", "{51FF51F5-9E42-41E0-9AD2-B2EFE7478ADE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{51FF51F5-9E42-41E0-9AD2-B2EFE7478ADE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51FF51F5-9E42-41E0-9AD2-B2EFE7478ADE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51FF51F5-9E42-41E0-9AD2-B2EFE7478ADE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51FF51F5-9E42-41E0-9AD2-B2EFE7478ADE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

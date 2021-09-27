@@ -1,0 +1,17 @@
+@page "/"
+
+@inject NavigationManager NavigationManager;
+
+<AuthorizeView>
+    <NotAuthorized>
+    @if (true)
+        {
+            NavigationManager.NavigateTo("/login");
+        }
+    </NotAuthorized>
+    <Authorized>
+    <p>Hello World</p>
+    </Authorized>
+</AuthorizeView>
+
+
