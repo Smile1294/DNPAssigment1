@@ -1,17 +1,21 @@
-@page "/"
+﻿@page "/kids"
 
-@inject NavigationManager _manager;
+@inject NavigationManager NavigationManager;
 
 <AuthorizeView>
     <NotAuthorized>
     @if (true)
         {
-            _manager.NavigateTo("/login");
+            NavigationManager.NavigateTo("/login");
         }
     </NotAuthorized>
     <Authorized>
         <NavBar></NavBar>
+        <p>kids</p>
     </Authorized>
 </AuthorizeView>
 
 
+@code {
+    
+}

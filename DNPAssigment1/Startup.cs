@@ -27,6 +27,7 @@ namespace DNPAssigment1
             services.AddScoped<IUserService, InMemoryUserService>();
             services.AddScoped<AuthenticationStateProvider, CustomAuthProvider>();
             services.AddSingleton<FileContext>();
+            services.AddSingleton<IFamiliesData, FileContext>();
 
             services.AddAuthorization(options =>
             {

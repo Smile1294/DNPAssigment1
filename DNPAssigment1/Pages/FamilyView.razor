@@ -1,0 +1,40 @@
+﻿@page "/Display/{Id:int}"
+@using global::Models
+@using DNPAssigment1.Persistance
+
+@inject IFamiliesData _families;
+@inject NavigationManager NavigationManager;
+
+<AuthorizeView>
+    <NotAuthorized>
+        @if (true)
+        {
+            NavigationManager.NavigateTo("/login");
+        }
+    </NotAuthorized>
+    <Authorized>
+        <NavBar></NavBar>
+        @Family.Adults[0].JobTitle.JobTitle
+    </Authorized>
+    </AuthorizeView>
+
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    private Family Family;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Family = _families.getFamily(Id);
+        await Task.Delay(1000);
+    }
+
+    private void back()
+    {
+        
+        NavigationManager.NavigateTo("/families");
+    }
+
+}

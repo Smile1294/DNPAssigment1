@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.Json;
 using DNPAssigment1.Models;
 using Models;
 
-namespace DNPAssigment1.Persistance
+namespace DNPAssigment1.Persistance 
 {
-    public class FileContext
+    public class FileContext : IFamiliesData
     {
         public IList<Family> Families { get; private set; }
         public IList<Adult> Adults { get; private set; }
@@ -20,7 +21,31 @@ namespace DNPAssigment1.Persistance
             Adults = File.Exists(adultsFile) ? ReadData<Adult>(adultsFile) : new List<Adult>();
         }
 
-        private IList<T> ReadData<T>(string s)
+        public void Update(Family family)
+        {
+            Family familytoupdate = Families.First(t => t.Id == family.Id);
+            familytoupdate = family;
+            SaveChanges();
+        }
+
+        public Family getFamily(int id)
+        {
+            return Families.FirstOrDefault(t => t.Id == id);
+        }
+
+
+        public IList<Adult> LoadAdults()
+        {
+            Adults = File.Exists(adultsFile) ? ReadData<Adult>(adultsFile) : new List<Adult>();
+            return Adults;
+        }
+
+        public IList<Family> LoadFamilies()
+        {
+            Families = File.Exists(familiesFile) ? ReadData<Family>(familiesFile) : new List<Family>();
+            return Families;
+        }
+        public IList<T> ReadData<T>(string s)
         {
             using (var jsonReader = File.OpenText(s))
             {
