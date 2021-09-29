@@ -14,6 +14,10 @@ namespace DNPAssigment1.Persistance
         Family getFamily(int id);
 
         void Update(Family family);
+        Adult getAdult(int id);
+
+        void UpdateAdults(Adult adult);
+
 
 
     }

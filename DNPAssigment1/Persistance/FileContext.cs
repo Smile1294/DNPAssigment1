@@ -21,6 +21,19 @@ namespace DNPAssigment1.Persistance
             Adults = File.Exists(adultsFile) ? ReadData<Adult>(adultsFile) : new List<Adult>();
         }
 
+        public Adult getAdult(int id)
+        {
+            return Adults.FirstOrDefault(t => t.Id == id);
+        }
+
+        public void UpdateAdults(Adult adultd)
+        {
+            Adult adult = Adults.First(t => t.Id == adultd.Id);
+            adult = adultd;
+            SaveChanges();  
+        }
+
+
         public void Update(Family family)
         {
             Family familytoupdate = Families.First(t => t.Id == family.Id);
