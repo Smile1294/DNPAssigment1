@@ -17,6 +17,7 @@ namespace DNPAssigment1.Persistance
         Adult getAdult(int id);
 
         void UpdateAdults(Adult adult);
+        void AddAdult(Adult adult);
 
 
 

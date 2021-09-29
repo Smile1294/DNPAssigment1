@@ -33,6 +33,13 @@ namespace DNPAssigment1.Persistance
             SaveChanges();  
         }
 
+        public void AddAdult(Adult adult)
+        {
+            int max = Adults.Max(adult => adult.Id);
+            adult.Id = (++max);
+            Adults.Add(adult);
+            SaveChanges();
+        }
 
         public void Update(Family family)
         {

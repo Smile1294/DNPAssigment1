@@ -223,5 +223,20 @@
     "Weight": 81.8,
     "Height": 172,
     "Sex": "M"
+  },
+  {
+    "JobTitle": {
+      "JobTitle": "Software developer",
+      "Salary": 12
+    },
+    "Id": 15,
+    "FirstName": "D\u00E1vid",
+    "LastName": "Michalco",
+    "HairColor": "Brown",
+    "EyeColor": "Brown",
+    "Age": 20,
+    "Weight": 72,
+    "Height": 178,
+    "Sex": "M"
   }
 ]
