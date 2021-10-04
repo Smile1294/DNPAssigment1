@@ -17,9 +17,10 @@
 <div class="flex flex-col justify-center items-center">
   <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8 w-1/2 mt-2">
     <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+      <input class="mt-2 mb-2 rounded" placeholder="Filter by name" @oninput="@(Filter)">
       <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
         <table class="min-w-full divide-y bg-gray-200 bg-opacity-60 shadow-md">
-          <thead class="bg-gray-200 bg-opacity-60 shadow-md" >
+          <thead class="bg-gray-200 bg-opacity-60 shadow-md">
           <tr>
             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
               Name
@@ -33,44 +34,39 @@
             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
               Job Title
             </th>
-            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              </th>
           </tr>
           </thead>
-          
+
           <tbody class="bg-gray-200 bg-opacity-60 shadow-md divide-y divide-gray-200">
-          
-          @foreach (var adult in adults)
-                   {
-                     <tr>
-                       <td class="px-6 py-4 whitespace-nowrap" @onclick="@(()=>Display(adult.Id))">
-                         <div class="flex items-center">
-                           <div class="ml-4">
-                             <div class="text-sm font-medium text-gray-900">
-                               @adult.FirstName @adult.LastName 
-                             </div>
-                           </div>
-                         </div>
-                       </td>
-                       <td class="px-6 py-4 whitespace-nowrap" @onclick="@(()=>Display(adult.Id))">
-                         <div class="text-sm text-gray-900"></div>
-                         <div class="text-sm text-gray-500"> 
-                           @adult.Age
-                         </div>
-                       </td>
-                       <td class="px-6 py-4 whitespace-nowrap" @onclick="@(()=>Display(adult.Id))">
-                         <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                           @adult.Sex
-                         </span>
-                       </td>
-                       <td class="px-6 py-4 whitespace-nowrap" @onclick="@(()=>Display(adult.Id))">
-                           @adult.JobTitle.JobTitle
-                       </td>
-                       <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                         <button class="text-sm font-medium text-gray-900" @onclick="@(()=>Edit(adult.Id))">Edit</button>
-                       </td>
-                     </tr>
-                   }
+
+          @foreach (var adult in adultstoshow)
+          {
+            <tr>
+              <td class="px-6 py-4 whitespace-nowrap" @onclick="@(() => Display(adult.Id))">
+                <div class="flex items-center">
+                  <div class="ml-4">
+                    <div class="text-sm font-medium text-gray-900">
+                      @adult.FirstName @adult.LastName
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap" @onclick="@(() => Display(adult.Id))">
+                <div class="text-sm text-gray-900"></div>
+                <div class="text-sm text-gray-500">
+                  @adult.Age
+                </div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap" @onclick="@(() => Display(adult.Id))">
+                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                  @adult.Sex
+                </span>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap" @onclick="@(() => Display(adult.Id))">
+                @adult.JobTitle.JobTitle
+              </td>
+            </tr>
+          }
           </tbody>
         </table>
       </div>
@@ -83,10 +79,12 @@
 
 @code {
   private IList<Adult> adults;
-  
+  private IList<Adult> adultstoshow;
+
   protected override async Task OnInitializedAsync()
   {
     adults = _familiesData.LoadAdults();
+    Filter(new ChangeEventArgs());
     await Task.Delay(1000);
   }
 
@@ -97,6 +95,27 @@
   private void Display(int Id)
   {
     NavigationManager.NavigateTo($"DisplayAdult/{Id}");
+  }
+  
+  private void Filter(ChangeEventArgs args)
+  {
+    string filterByName = null;
+    try
+    {
+      filterByName = args.Value?.ToString();
+    }
+    catch (Exception e)
+    {
+      System.Console.WriteLine(e);
+    }
+    if (filterByName != null && !filterByName.Equals(""))
+    {
+      adultstoshow = adults.Where(t => t.FirstName.Contains(filterByName) || t.LastName.Contains(filterByName)).ToList();
+    }
+    else
+    {
+      adultstoshow = adults;
+    }
   }
   
 }
